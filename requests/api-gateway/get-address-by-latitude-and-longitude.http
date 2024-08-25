@@ -1,0 +1,16 @@
+### GET address by latitude and longitude
+GET {{host}}/address?latitude=52&longitude=13
+
+> {%
+  client.test("should execute successfully", () => client.assert(response.status === 200));
+  client.test("should have latitude = 52.0", () => client.assert(response.body.location.latitude === 52.0));
+  client.test("should have longitude = 13.0", () => client.assert(response.body.location.longitude === 13.0));
+  client.test("should have post_code = 14913", () => client.assert(response.body.address.post_code === "14913"));
+  client.test("should have city = Niedergorsdorf", () => client.assert(response.body.address.city === "Niedergorsdorf"));
+  client.test("should have country = DE", () => client.assert(response.body.address.country === "DE"));
+%}
+
+### GET ISS address by latitude and longitude
+# iss-latitude: run get-iss-location.http to set
+# iss-longitude: run get-iss-location.http to set
+GET {{host}}/address?latitude={{iss-latitude}}&longitude={{iss-longitude}}

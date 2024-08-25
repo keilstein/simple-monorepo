@@ -1,0 +1,17 @@
+plugins {
+    id 'io.freefair.lombok' version '8.10'
+    id 'org.springframework.boot' version '3.3.3' apply false
+
+    id 'buildlogic.java-library-conventions'
+}
+
+dependencies {
+    implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+
+    implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    testImplementation project(':lib:utils:test-utils')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

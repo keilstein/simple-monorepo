@@ -1,0 +1,16 @@
+### GET ISS Location
+GET {{host}}/v1/iss-location
+
+> {%
+  client.test("should execute successfully", () => client.assert(response.status === 200));
+  client.test("should have latitude >= -90", () => client.assert(response.body.location.latitude >= -90));
+  client.test("should have latitude <= +90", () => client.assert(response.body.location.latitude <= +90));
+  client.test("should have longitude >= -180", () => client.assert(response.body.location.longitude >= -180));
+  client.test("should have longitude <= +180", () => client.assert(response.body.location.longitude <= +180));
+  client.test("should have precision >= 0", () => client.assert(response.body.precision.precision >= 0));
+  client.test("should have precision <= 10 sec", () => client.assert(response.body.precision.precision <= 10000));
+  client.test("should have unit", () => client.assert(response.body.precision.unit === "MILLISECONDS"));
+
+  client.global.set("iss-latitude", response.body.location.latitude);
+  client.global.set("iss-longitude", response.body.location.longitude);
+%}

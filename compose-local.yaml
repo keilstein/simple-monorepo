@@ -1,0 +1,36 @@
+services:
+  api-gateway:
+    image: api-gateway
+    container_name: api-gateway
+    build:
+      context: ./
+      dockerfile: ./ops/docker/api-gateway.Dockerfile
+    environment:
+      - PORT=8081
+      - SPRING_PROFILES_ACTIVE=local
+      - GEOLOCATION_RESOLVER_SERVICE_URI=http://geolocation-resolver:8082
+      - OPEN_NOTIFY_ADAPTER_SERVICE_URI=http://open-notify-adapter:8083
+    ports:
+      - "8081:8081"
+  geolocation-resolver:
+    image: geolocation-resolver
+    container_name: geolocation-resolver
+    build:
+      context: ./
+      dockerfile: ./ops/docker/geolocation-resolver.Dockerfile
+    environment:
+      - PORT=8082
+      - SPRING_PROFILES_ACTIVE=local
+    ports:
+      - "8082:8082"
+  open-notify-adapter:
+    image: open-notify-adapter
+    container_name: open-notify-adapter
+    build:
+      context: ./
+      dockerfile: ./ops/docker/open-notify-adapter.Dockerfile
+    environment:
+      - PORT=8083
+      - SPRING_PROFILES_ACTIVE=local
+    ports:
+      - "8083:8083"

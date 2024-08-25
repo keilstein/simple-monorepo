@@ -1,0 +1,19 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: geolocation-resolver-service_rewrite_route
+          uri: ${GEOLOCATION_RESOLVER_SERVICE_URI:http://localhost:8082}
+          predicates:
+            - Path=/address
+          filters:
+            - RewritePath=/address, /v1/address
+        - id: open-notify-adapter-service_rewrite_route
+          uri: ${OPEN_NOTIFY_ADAPTER_SERVICE_URI:http://localhost:8083}
+          predicates:
+            - Path=/iss-location
+          filters:
+            - RewritePath=/iss-location, /v1/iss-location

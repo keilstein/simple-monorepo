@@ -1,0 +1,25 @@
+services:
+  api-gateway:
+    image: api-gateway
+    container_name: api-gateway
+    build:
+      context: ./
+      dockerfile: ./ops/docker/api-gateway.Dockerfile
+    ports:
+      - "8080:8080"
+  geolocation-resolver:
+    image: geolocation-resolver
+    container_name: geolocation-resolver
+    build:
+      context: ./
+      dockerfile: ./ops/docker/geolocation-resolver.Dockerfile
+    ports:
+      - "8080:8080"
+  open-notify-adapter:
+    image: open-notify-adapter
+    container_name: open-notify-adapter
+    build:
+      context: ./
+      dockerfile: ./ops/docker/open-notify-adapter.Dockerfile
+    ports:
+      - "8080:8080"

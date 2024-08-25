@@ -1,0 +1,21 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: geolocation-resolver-service_rewrite_route
+          uri: ${GEOLOCATION_RESOLVER_SERVICE_URI:https://geolocation-resolver-service.keilstein.org}
+          predicates:
+            - Path=/address
+          filters:
+            - RewritePath=/address, /v1/address
+        - id: open-notify-adapter-service_rewrite_route
+          uri: ${OPEN_NOTIFY_ADAPTER_SERVICE_URI:https://open-notify-adapter-service.keilstein.org}
+          predicates:
+            - Path=/iss-location
+          filters:
+            - RewritePath=/iss-location, /v1/iss-location
