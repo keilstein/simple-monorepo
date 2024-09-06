@@ -1,6 +1,6 @@
 # Contributing
 
-**Simple Monorepo** is open to contributions.
+This project is open to contributions.
 
 In order to keep it simple and speed up the process of contributing, we have put a few guidelines in this document.
 
